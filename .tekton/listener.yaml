@@ -1,20 +1,29 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
   name: echo-listener
 spec:
   triggers:
-    - binding:
-        name: echo-pipeline-binding
+    - name: simple-echo
+      bindings:
+        - ref: echo-pipeline-binding
       template:
-        name: echo-pipeline-template
+        ref: echo-pipeline-template
 ---
-apiVersion: tekton.dev/v1beta1
+apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
   name: echo-pipeline-binding
+spec:
+  params:
+  - name: quote
+    value: "Live and let die"
+  - name: noquote
+    value: "Enjoy the silence"
+  - name: timestamp
+    value: $(event.commits[0].timestamp)   
 ---
-apiVersion: tekton.dev/v1beta1
+apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
   name: echo-pipeline-template
@@ -22,23 +31,25 @@ spec:
   params:
     - name: quote
       description: Quoted property
+      default: "My kingdom for a quote"
     - name: noquote
       description: UnQuoted property
+      default: "Who needs a quote anyway"
+    - name: timestamp
+      description: Timestamp of first commit
+      default:   "1970-01-01T00:00:00Z"
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
         generateName: echo-pipeline-run-
-        labels:
-          triggertemplated: "true"
-          generatedBy: "echo-example"
       spec:
         pipelineRef:
           name: echo-props-pipeline
         params:
           - name: quote
-            value: $(params.quote)
+            value: $(tt.params.quote)
           - name: noquote
-            value: $(params.noquote)
-          - name: environment_value
-            value: $(params.environment)  
+            value: $(tt.params.noquote)
+          - name: timestamp
+            value: $(tt.params.timestamp)  

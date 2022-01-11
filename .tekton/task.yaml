@@ -29,6 +29,8 @@ spec:
       description: Simple un-quoted property
     - name: environment_value
       description: Value from pipeline, trigger, or run property    
+    - name: timestamp
+      descripton: Timestamp of git commit if present  
   steps:
     - name: show-props
       image: ubuntu
@@ -38,7 +40,9 @@ spec:
         - name: NOQUOTE
           value: $(inputs.params.noquote)
         - name: ENVIRONMENT_VALUE
-          value: $(params.environment_value)    
+          value: $(params.environment_value)
+        - name: TIMESTAMP
+          value: $(inputs.params.timestamp)      
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mquote\033[0m value from properties is >>";
@@ -46,6 +50,9 @@ spec:
           echo "";
           echo -e "The \033[36menvironment\033[0m value from properties is >>";
           echo $ENVIRONMENT_VALUE
+          echo "";
+          echo -e "The \033[36mtimestamp\033[0m value from properties is >>";
+          echo $TIMESTAMP
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
