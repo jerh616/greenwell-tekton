@@ -40,7 +40,7 @@ spec:
         - name: NOQUOTE
           value: $(inputs.params.noquote)
         - name: ENVIRONMENT_VALUE
-          value: $(params.environment_value)
+          value: $(input.params.environment_value)
         - name: TIMESTAMP
           value: $(inputs.params.timestamp)      
       command: ["/bin/bash", "-c"]
