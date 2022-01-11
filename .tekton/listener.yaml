@@ -37,7 +37,7 @@ spec:
       default: "Who needs a quote anyway"
     - name: timestamp
       description: Timestamp of first commit
-      default:   "1970-01-01T00:00:00Z"
+      default: "1970-01-01T00:00:00Z"
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -52,4 +52,4 @@ spec:
           - name: noquote
             value: $(tt.params.noquote)
           - name: timestamp
-            value: $(tt.params.timestamp)  
+            value: $(params.timestamp)  
