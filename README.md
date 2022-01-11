@@ -1,3 +1,1 @@
 Sample tekton pipeline
-
-pokemon
