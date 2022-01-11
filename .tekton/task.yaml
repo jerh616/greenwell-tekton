@@ -30,7 +30,7 @@ spec:
     - name: environment_value
       description: Value from pipeline, trigger, or run property    
     - name: timestamp
-      descripton: Timestamp of git commit if present  
+      descripton: Timestamp of git commit if present
   steps:
     - name: show-props
       image: ubuntu
