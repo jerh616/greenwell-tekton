@@ -21,7 +21,7 @@ spec:
   - name: noquote
     value: "Enjoy the silence"
   - name: timestamp
-    value: $(event.commits[0].timestamp)   
+    value: $(event.created_at)   
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
