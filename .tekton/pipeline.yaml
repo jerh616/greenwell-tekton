@@ -15,7 +15,7 @@ spec:
       default: BLOOPER 
     - name: timestamp
       description: Git commit timestamp
-      default: NO_TIMESTMAP   
+      default: EMPTYTIMESTMAP   
   tasks:
     - name: show-build-number
       taskRef:
