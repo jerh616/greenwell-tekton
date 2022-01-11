@@ -14,7 +14,7 @@ spec:
       command: ["bash", "-c"]
       args:
         - echo $BUILD_NUMBER;
-          sleep 30;
+          sleep 5;
           echo "COMPLETED"
 ---
 apiVersion: tekton.dev/v1beta1
@@ -42,7 +42,7 @@ spec:
         - name: ENVIRONMENT_VALUE
           value: $(inputs.params.environment_value)
         - name: TIMESTAMP
-          value: $(params.timestamp)  
+          value: $(event.commits[0].timestamp)  
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mquote\033[0m value from properties is >>";
