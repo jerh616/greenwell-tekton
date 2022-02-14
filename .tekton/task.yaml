@@ -93,6 +93,8 @@ spec:
           echo $SECURE_VALUE;
           test=`echo ${SECURE_VALUE}`;
           echo ${test}
+          echo SLEEPING FOR 7 mins
+          sleep 420
 
 ---
 apiVersion: tekton.dev/v1beta1
