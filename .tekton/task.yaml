@@ -167,3 +167,37 @@ spec:
         - set -x
           apt-get install -y wget;
           wget -qO- https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb --post-data="" | jq '.'
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: big-echo-task
+spec:
+  params:
+    - name: log-line-bytes
+      description: Number of bytes in the log line
+      default: "100000"
+      type: string
+    - name: num-log-lines
+      description: Number of lines to print to the log
+      default: "100"
+      type: string
+  steps:
+    - name: big-log-echo
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi@sha256:4aaabf49950796d9004f6e4f04ff53ab24dcd3fd29d8cc719a9b81f7546d31f2
+      env:
+        - name: LOG_LINE_BYTES
+          value: $(params.log-line-bytes)
+        - name: LOG_LINES
+          value: $(params.num-log-lines)
+      script: |
+        #!/usr/bin/env bash
+
+        # Create a file with LOG_LINE_BYTES random characters in a single line
+        < /dev/urandom tr -dc "[:alnum:]" | head -c${LOG_LINE_BYTES} > file.txt
+
+        # cat the file to stdout LOG_LINES times
+        for i in $(seq 0 ${LOG_LINES})
+        do
+          cat file.txt
+        done
