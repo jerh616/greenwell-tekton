@@ -1,6 +1,18 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
+  name: big-echo-listener
+spec:
+  triggers:
+    - name: big-echo
+      bindings:
+        - ref: big-echo-pipeline-binding
+      template:
+        ref: big-echo-pipeline-template
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
   name: echo-listener
 spec:
   triggers:
@@ -24,6 +36,13 @@ spec:
     value: $(event.head_commit.timestamp)
   - name: timestamp
     value: $(event.commits)
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: big-echo-pipeline-binding
+spec:
+  params:    
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
@@ -54,4 +73,20 @@ spec:
           - name: noquote
             value: $(tt.params.noquote)
           - name: timestamp
-            value: $(params.timestamp)  
+            value: $(params.timestamp) 
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: big-echo-pipeline-template
+spec:
+  params:
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: big-echo-run-
+      spec:
+        pipelineRef:
+          name: big-echo-pipeline
+        params:
