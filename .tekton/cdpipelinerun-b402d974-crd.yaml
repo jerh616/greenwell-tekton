@@ -1,0 +1,37 @@
+## Tekton CRD: cdpipelinerun-b402d974-crd.yaml:
+
+apiVersion: devops.cloud.ibm.com/v1alpha1
+kind: CDPipelineRun
+metadata:
+  name: september2
+spec:
+  eventPayload: '{}'
+  eventListener: echo-listener
+  secretStores:
+    - name: jerh-kp
+      vaultType: kp
+      vaultHost: 'https://qa.us-south.kms.test.cloud.ibm.com'
+      vaultInstance: f6d57eb8-34a2-4ca9-a56f-208e98c60f23
+      authType: iam-apikey
+      localSecretRef:
+        name: jerh-kp-dev-iam-apikey
+        namespace: disconnected-agent
+    - name: samplevault1
+      vaultType: hv
+      vaultHost: 'https://vserv-test.sos.ibm.com:8200'
+      authType: approle
+      localSecretRef:
+        name: samplevault1-auth-creds-approle
+        namespace: disconnected-agent
+  pipelineDefinitions:
+    - repoURL: 'https://github.com/jerh616/greenwell-tekton.git'
+      repoBranch: imagepulling
+      repoPath: .tekton
+      repoType: GitHub
+    - repoURL: 'https://us-south.git.dev.cloud.ibm.com/jerocono/tekton-as-code.git'
+      repoBranch: master
+      repoPath: .tekton
+      repoType: GitLab
+      repoSecretPath:
+        secretStoreName: <INSERT SECRET STORE NAME>
+        path: <INSERT SECRET STORE PATH>

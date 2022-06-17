@@ -1,0 +1,18 @@
+## Pipeline Kustomize file (base): base/kustomization.yaml
+# See Kustomize reference for guides and examples
+# https://kubectl.docs.kubernetes.io/references/kustomize/
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+resources: []
+configMapGenerator:
+  - name: environment-properties
+    envs:
+      - environment-properties.env
+secretGenerator:
+  - name: secure-properties
+    envs:
+      - secure-properties.env
+    type: Opaque
