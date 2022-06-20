@@ -28,10 +28,3 @@ spec:
       repoBranch: imagepulling
       repoPath: .tekton
       repoType: GitHub
-    - repoURL: 'https://us-south.git.dev.cloud.ibm.com/jerocono/tekton-as-code.git'
-      repoBranch: master
-      repoPath: .tekton
-      repoType: GitLab
-      repoSecretPath:
-        secretStoreName: <INSERT SECRET STORE NAME>
-        path: <INSERT SECRET STORE PATH>
