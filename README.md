@@ -1,3 +1,3 @@
 Sample tekton pipeline
 scrum
-bump
+classic bump
