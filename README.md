@@ -1,3 +1,2 @@
 Sample tekton pipeline
-scrum
-classic bump
+retry x 2
