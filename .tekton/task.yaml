@@ -5,7 +5,7 @@ metadata:
 spec:
   steps:
     - name: simple-step
-      image: ibmcom/pipeline-base-image:latest
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.23
       env:
         - name: BUILD_NUMBER
           valueFrom:
