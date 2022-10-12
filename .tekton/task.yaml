@@ -6,6 +6,7 @@ spec:
   steps:
     - name: simple-step
       image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.23
+      imagePullPolicy: IfNotPresent
       env:
         - name: BUILD_NUMBER
           valueFrom:
@@ -45,6 +46,7 @@ spec:
   steps:
     - name: show-props
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       env:
         - name: QUOTE
           value: $(inputs.params.quote)
@@ -73,6 +75,7 @@ spec:
   steps:
     - name: cm-show-props
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       env:
         - name: SECURE_VALUE
           valueFrom:
@@ -103,6 +106,7 @@ spec:
   steps:
     - name: cm-show-environment
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       envFrom:
         - configMapRef:
               name: environment-properties 
@@ -122,6 +126,7 @@ spec:
   steps:
     - name: cm-show-full-env
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       envFrom:
         - configMapRef:
             name: environment-properties
@@ -140,6 +145,7 @@ spec:
   steps:
     - name: cm-show-toolchain-env
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       envFrom:
         - configMapRef:
             name: toolchain  
@@ -157,6 +163,7 @@ spec:
   steps:
     - name: call-another-pipeline
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       envFrom:
         - configMapRef:
             name: environment-properties     

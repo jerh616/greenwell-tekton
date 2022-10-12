@@ -6,6 +6,7 @@ spec:
   steps:
     - name: simple-step
       image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.23
+      imagePullPolicy: IfNotPresent
       env:
         - name: BUILD_NUMBER
           valueFrom:
