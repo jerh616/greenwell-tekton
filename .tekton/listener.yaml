@@ -1,57 +1,48 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
-  name: echo-listener
+  name: endpoint-listener
 spec:
   triggers:
-    - name: simple-echo
+    - name: simple-endpoint-test
       bindings:
-        - ref: echo-pipeline-binding
+        - ref: pse-test-pipeline-binding
       template:
-        ref: echo-pipeline-template
+        ref: pse-test-pipeline-template
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
-  name: echo-pipeline-binding
+  name: pse-test-pipeline-binding
 spec:
   params:
-  - name: quote
-    value: "Live and let die"
-  - name: noquote
-    value: "Enjoy the silence"
-  - name: timestamp-head
-    value: $(event.head_commit.timestamp)
-  - name: timestamp
-    value: $(event.commits)
+  - name: public-endpoint
+    value: "public-endpoint-address"
+  - name: private-endpoint
+    value: "private-endpoint-address"
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: echo-pipeline-template
+  name: pse-test-pipeline-template
 spec:
   params:
-    - name: quote
-      description: Quoted property
-      default: "My kingdom for a quote"
-    - name: noquote
-      description: UnQuoted property
-      default: "Who needs a quote anyway"
-    - name: timestamp
-      description: Timestamp of first commit
-      default: "1970-01-01T00:00:00Z"
+    - name: private-endpoint
+      description: Public Endpoint
+      default: https://private-worker-service.eu-gb.devops.cloud.ibm.com
+    - name: private-endpoint
+      description: Private Endpoint
+      default: https://private-worker-service.private.eu-gb.devops.cloud.ibm.com
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: echo-pipeline-run-
+        generateName: pse-test-pipeline-run-
       spec:
         pipelineRef:
-          name: echo-props-pipeline
+          name: pse-test-pipeline
         params:
-          - name: quote
-            value: $(tt.params.quote)
-          - name: noquote
-            value: $(tt.params.noquote)
-          - name: timestamp
-            value: $(params.timestamp)  
+          - name: public-endpoint
+            value: $(tt.params.public-endpoint)
+          - name: private-endpoint
+            value: $(tt.params.private-endpoint)
