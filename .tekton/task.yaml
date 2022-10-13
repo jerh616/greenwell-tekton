@@ -3,6 +3,11 @@ kind: Task
 metadata:
   name: endpoint-task
 spec:
+  params:
+    - name: public-endpoint
+      description: Publicly available endpoint
+    - name: private-endpoint
+      description: Privately accessible only endpoint
   steps:
     - name: test-public-endpoint
       image: ubuntu
