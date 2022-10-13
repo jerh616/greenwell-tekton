@@ -17,7 +17,7 @@ spec:
         - echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
           env;
           curl ${public-endpoint};
-          steps:
+      steps:
     - name: test-private-endpoint
       image: ubuntu
       imagePullPolicy: IfNotPresent
