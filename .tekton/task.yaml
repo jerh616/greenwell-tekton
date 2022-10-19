@@ -25,7 +25,7 @@ spec:
           echo dig;
           dig +short ${public_endpoint}; 
           echo curl;
-          curl 'https://${public_endpoint}/status';
+          curl https://${public_endpoint}/status;
       steps:
     - name: test-private-endpoint
       image: jerhoconnor/toolbox
@@ -43,4 +43,4 @@ spec:
           echo dig;
           dig +short ${private_endpoint}; 
           echo curl;
-          curl 'https://${private_endpoint}/status';
+          curl https://${private_endpoint}/status;
