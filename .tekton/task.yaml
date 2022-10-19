@@ -43,4 +43,4 @@ spec:
           echo dig;
           dig +short ${private_endpoint}; 
           echo curl;
-          curl https://${private_endpoint}/status;
+          curl --connect-timeout 10 https://${private_endpoint}/status;
