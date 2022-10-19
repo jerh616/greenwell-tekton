@@ -19,9 +19,10 @@ spec:
             name: secure-properties     
       command: ["/bin/bash", "-c"]
       args:
-        - echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
+        - set -x;
+          echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
           env;
-          curl ${public-endpoint};
+          curl ${public_endpoint};
       steps:
     - name: test-private-endpoint
       image: jerhoconnor/toolbox
@@ -33,6 +34,7 @@ spec:
             name: secure-properties     
       command: ["/bin/bash", "-c"]
       args:
-        - echo -e "Testing \033[36mPRIVATE\033[0m endpoint";
+        - set -x;
+          echo -e "Testing \033[36mPRIVATE\033[0m endpoint";
           env;
-          curl ${private-endpoint};
+          curl ${private_endpoint};
