@@ -44,3 +44,6 @@ spec:
     - name: cm-toolchain-props
       taskRef:
         name: cm-toolchain-props
+    - name: show-cm-event-parameters
+      taskRef:
+        name: cm-event-parameters    
