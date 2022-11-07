@@ -44,3 +44,4 @@ spec:
           dig +short ${private_endpoint}; 
           echo curl;
           curl --connect-timeout 10 https://${private_endpoint}/status;
+          echo "COMPLETED TESTS"
