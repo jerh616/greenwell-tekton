@@ -38,10 +38,67 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - ${debug};
-          echo -e "Testing \033[36mPRIVATE\033[0m endpoint";
+          echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
           env;
           echo dig;
           dig +short ${private_endpoint}; 
           echo curl;
-          curl --connect-timeout 10 https://${private_endpoint}/status;
-          echo "COMPLETED TESTS"
+          curl -v https://${private_endpoint}/status;
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cm-toolchain-props
+spec:
+  steps:
+    - name: cm-show-toolchain-env
+      image: ubuntu
+      envFrom:
+        - configMapRef:
+            name: toolchain  
+      command: ["/bin/bash", "-c"]
+      args:
+        - set -x
+          echo -e "The \033[36menvironment\033[0m for this Step is ";
+          env
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: call-the-pipe-cleaner
+spec:
+  steps:
+    - name: call-another-pipeline
+      image: ubuntu
+      envFrom:
+        - configMapRef:
+            name: environment-properties     
+      command: ["/bin/bash", "-c"]
+      args:
+        - set -x
+          apt-get install -y wget;
+          wget -qO- https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb --post-data="" | jq '.'
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cm-event-parameters
+spec:
+  steps:
+    - name: cm-show-event-env
+      image: ubuntu
+      envFrom:
+        - configMapRef:
+            name: event-parameters  
+      command: ["/bin/bash", "-c"]
+      args:
+        - set -x
+          echo -e "The \033[36menvironment\033[0m including \033[36mevent-parameters\033[0m is ";
+          env
+    - name: cm-show-event-keys
+      image: ubuntu
+      envFrom:
+        - configMapKeyRef:
+            name: eventHeader
+        - configMapKeyRef:
+            name: eventBody         
