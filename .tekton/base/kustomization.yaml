@@ -4,18 +4,13 @@
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonLabels:
+  devops.cloud.ibm.com/cd: kustomize
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-  - listener.yaml
-  - pipeline.yaml
-  - task.yaml
+  - standalone.yaml
 configMapGenerator:
   - name: environment-properties
     envs:
       - environment-properties.env
-secretGenerator:
-  - name: secure-properties
-    envs:
-      - secure-properties.env
-    type: Opaque
