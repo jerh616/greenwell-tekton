@@ -1,7 +1,0 @@
-{
-  "name": "greenwell-tekton",
-  "private": true,
-  "version": "0.0.1",
-  "description": "Basic tekton pipeline for greenwell",
-  "author": "Brian Gleeson"
-}
