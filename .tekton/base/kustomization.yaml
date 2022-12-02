@@ -9,7 +9,8 @@ commonLabels:
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-  - standalone.yaml
+  - hashicorpvaultSecretStore.yaml
+  - sampleExternalSecret.yaml
 configMapGenerator:
   - name: environment-properties
     envs:
