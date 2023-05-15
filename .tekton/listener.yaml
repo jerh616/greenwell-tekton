@@ -48,14 +48,14 @@ spec:
       spec:
         pipelineRef:
           name: echo-props-pipeline
+        workspaces:
+          - name: common-stuff
+            persistentVolumeClaim:
+              claimName: pipelinerun-$(uid)-pvc 
         params:
           - name: quote
             value: $(tt.params.quote)
           - name: noquote
             value: $(tt.params.noquote)
           - name: timestamp
-            value: $(params.timestamp)
-        workspaces:
-          - name: common-stuff
-            PersistentVolumeClaim:
-              claimName: pipelinerun-$(uid)-pvc    
+            value: $(params.timestamp)   
