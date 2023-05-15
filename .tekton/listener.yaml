@@ -44,7 +44,7 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: pipelinerun-$(uid)-pvc
+        name: pipelinerun-common-pvc
       spec:
         resources:
           requests:
@@ -62,7 +62,7 @@ spec:
         workspaces:
           - name: common-stuff
             persistentVolumeClaim:
-              claimName: pipelinerun-$(uid)-pvc 
+              claimName: pipelinerun-common-pvc 
         params:
           - name: quote
             value: $(tt.params.quote)
