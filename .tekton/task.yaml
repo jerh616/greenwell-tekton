@@ -18,8 +18,8 @@ spec:
       args:
         - echo $BUILD_NUMBER;
           echo $BUILD_NUMBER > $(workspaces.write-workspace.path)/build-number
-          sleep 5;
-          cat $(workspaces.write-workspace.path)/build-number
+          sleep 5000;
+          cat $(workspaces.write-workspace.path)/build-number;
           echo "COMPLETED"
     # - name: use-cd-deploy-base
     #   image: us.icr.io/opentoolchain/cd-deploy-base:deploy
