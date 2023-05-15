@@ -3,6 +3,9 @@ kind: Task
 metadata:
   name: simple-task
 spec:
+  workspaces:
+    - name: write-workspace
+      mountPath: /testing
   steps:
     - name: simple-step
       image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.23
@@ -42,6 +45,9 @@ spec:
       description: Value from pipeline, trigger, or run property    
     - name: timestamp
       descripton: Timestamp of git commit if present
+  workspaces:
+    - name: read-workspace
+      mountPath: /testing
   steps:
     - name: show-props
       image: ubuntu
