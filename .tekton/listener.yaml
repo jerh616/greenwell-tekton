@@ -54,4 +54,8 @@ spec:
           - name: noquote
             value: $(tt.params.noquote)
           - name: timestamp
-            value: $(params.timestamp)  
+            value: $(params.timestamp)
+        workspaces:
+          - name: common-stuff
+            PersistentVolumeClaim:
+              claimName: pipelinerun-$(uid)-pvc    
