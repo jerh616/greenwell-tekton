@@ -41,7 +41,7 @@ spec:
       description: Timestamp of first commit
       default: "1970-01-01T00:00:00Z"
   resourcetemplates:
-    - apiVersion: tekton.dev/v1beta1
+    - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
         name: pipelinerun-$(uid)-pvc
