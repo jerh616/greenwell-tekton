@@ -20,6 +20,10 @@ spec:
     - name: show-build-number
       taskRef:
         name: simple-task
+      workspaces:
+        - name: write-workspace
+          workspace: common-stuff
+          subPath: temp  
     - name: echo-task
       taskRef:
         name: echo-props
@@ -31,7 +35,11 @@ spec:
         - name: environment_value
           value: $(params.environment_value)
         - name: timestamp
-          value: $(params.timestamp)  
+          value: $(params.timestamp) 
+      workspaces:
+        - name: read-workspace
+          workspace: common-stuff
+          subPath: temp     
     - name: cm-echo-task
       taskRef:
         name: cm-echo-props
