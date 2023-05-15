@@ -12,12 +12,12 @@ spec:
       default: TESTNOQUOTE
     - name: environment_value
       description: A value from the pipeline level, trigger level or run level
-      default: BLOOPER 
+      default: BLOOPER
     - name: timestamp
       description: Git commit timestamp
       default: EMPTYTIMESTMAP
   workspaces:
-    - name: common-stuff  
+    - name: common-stuff
   tasks:
     - name: show-build-number
       taskRef:
@@ -25,7 +25,7 @@ spec:
       workspaces:
         - name: write-workspace
           workspace: common-stuff
-          subPath: temp  
+          subPath: temp
     - name: echo-task
       taskRef:
         name: echo-props
@@ -37,16 +37,16 @@ spec:
         - name: environment_value
           value: $(params.environment_value)
         - name: timestamp
-          value: $(params.timestamp) 
+          value: $(params.timestamp)
       workspaces:
         - name: read-workspace
           workspace: common-stuff
-          subPath: temp     
+          subPath: temp
     - name: cm-echo-task
       taskRef:
         name: cm-echo-props
     - name: env-echo-task
-      taskRef: 
+      taskRef:
         name: cm-all-props
     - name: cm-secrets-all-props
       taskRef:
@@ -56,4 +56,4 @@ spec:
         name: cm-toolchain-props
     - name: show-cm-event-parameters
       taskRef:
-        name: cm-event-parameters    
+        name: cm-event-parameters
