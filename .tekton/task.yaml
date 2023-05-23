@@ -45,6 +45,7 @@ spec:
           echo curl;
           curl -v https://${private_endpoint}/status;
           echo COS;
+          ibmcloud config --check-version=false;
           ibmcloud login --apikey ${MYAPIKEY};
           ibmcloud plugin install -f cloud-object-storage;
           ibmcloud cos config crn fdcaf149-c28b-4cc7-becf-9cfa52fcba04;
