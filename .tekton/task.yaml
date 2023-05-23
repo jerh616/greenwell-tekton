@@ -48,7 +48,7 @@ spec:
           ibmcloud config --check-version=false;
           ibmcloud login --apikey ${MYAPIKEY} -r us-south;
           ibmcloud plugin install -f cloud-object-storage;
-          ibmcloud cos config crn fdcaf149-c28b-4cc7-becf-9cfa52fcba04;
+          ibmcloud cos config crn --crn fdcaf149-c28b-4cc7-becf-9cfa52fcba04;
           ibmcloud cos buckets;
           ibmcloud cos objects --bucket pipeline-evidence-2;
           echo FIN;
