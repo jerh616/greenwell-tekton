@@ -52,6 +52,9 @@ spec:
           echo "TRYING PUBLIC COS ENDPOINT";
           ibmcloud cos config endpoint-url --url s3.us.cloud-object-storage.appdomain.cloud;
           ibmcloud cos buckets;
+          echo "TRYING COS DOCUMENTED ENDPOINT FOR VPC";
+          ibmcloud cos config endpoint-url --url s3.direct.us-south.cloud-object-storage.appdomain.cloud;
+          ibmcloud cos buckets;
           echo "TRYING PRIVATE COS ENDPOINT";
           ibmcloud cos config endpoint-url --url s3.private.us.cloud-object-storage.appdomain.cloud;
           ibmcloud cos buckets;
