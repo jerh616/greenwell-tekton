@@ -59,6 +59,23 @@ spec:
           ibmcloud cos config endpoint-url --url s3.private.us.cloud-object-storage.appdomain.cloud;
           ibmcloud cos buckets;
           #ibmcloud cos objects --bucket pipeline-evidence-2;
+    - name: testing-dns
+      image: jerhoconnor/toolbox
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: environment-properties
+        - secretRef:
+            name: secure-properties     
+      command: ["/bin/bash", "-c"]
+      args:
+        - env;
+          echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
+          dig +trace s3.us.cloud-object-storage.appdomain.cloud;
+          echo -e "Testing \033[36mDIRECT\033[0m endpoint";
+          dig +trace s3.direct.us-south.cloud-object-storage.appdomain.cloud;
+          echo -e "Testing \033[36mPRIVATE\033[0m endpoint";
+          dig +trace s3.private.us-south.cloud-object-storage.appdomain.cloud;
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
