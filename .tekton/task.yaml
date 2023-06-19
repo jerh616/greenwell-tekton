@@ -9,7 +9,7 @@ spec:
     - name: private-endpoint
       description: Privately accessible only endpoint
   steps:
-    - name: test-public-endpoint
+    - name: network-test-endpoints
       image: jerhoconnor/toolbox
       imagePullPolicy: IfNotPresent
       envFrom:
@@ -36,7 +36,7 @@ spec:
           echo curl https://${private_endpoint}/status;
           curl https://${private_endpoint}/status;
       steps:
-    - name: test-private-endpoint
+    - name: cos-test-endpoints
       image: jerhoconnor/toolbox
       imagePullPolicy: IfNotPresent
       envFrom:
