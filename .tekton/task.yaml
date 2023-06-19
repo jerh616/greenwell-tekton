@@ -20,12 +20,21 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - ${debug};
-          echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
-          env;
-          echo dig;
+          echo -e "Testing \033[36mPIPELINE\033[0m endpoints";
+          echo =================;
+          echo = PUBLIC;
+          echo =================;
+          echo dig +short ${public_endpoint}; 
           dig +short ${public_endpoint}; 
-          echo curl;
+          echo curl https://${public_endpoint}/status;
           curl https://${public_endpoint}/status;
+          echo =================;
+          echo = PRIVATE;
+          echo =================;
+          echo dig +short ${private_endpoint}; 
+          dig +short ${private_endpoint}; 
+          echo curl https://${private_endpoint}/status;
+          curl https://${private_endpoint}/status;
       steps:
     - name: test-private-endpoint
       image: jerhoconnor/toolbox
@@ -38,10 +47,10 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - ${debug};
-          echo -e "Testing \033[36mPUBLIC\033[0m endpoint";
+          echo -e "Testing \033[36mCOS\033[0m endpoints";
           env;
           echo dig;
-          dig +short ${private_endpoint}; 
+          dig +short ${cos-private-endpoint}; 
           echo curl;
           curl -v https://${private_endpoint}/status;
           echo COS;
