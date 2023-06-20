@@ -12,6 +12,7 @@ spec:
     - name: network-test-endpoints
       image: jerhoconnor/toolbox
       imagePullPolicy: IfNotPresent
+      onError: continue
       envFrom:
         - configMapRef:
             name: environment-properties
@@ -28,6 +29,7 @@ spec:
           dig +short ${public_endpoint}; 
           echo curl https://${public_endpoint}/status;
           curl https://${public_endpoint}/status;
+          echo;
           echo =================;
           echo = PRIVATE;
           echo =================;
@@ -49,11 +51,6 @@ spec:
         - ${debug};
           echo -e "Testing \033[36mCOS\033[0m endpoints";
           env;
-          echo dig;
-          dig +short ${cos-private-endpoint}; 
-          echo curl;
-          curl -v https://${private_endpoint}/status;
-          echo COS;
           ibmcloud config --check-version=false;
           ibmcloud login --apikey ${MYAPIKEY} -r us-south;
           ibmcloud plugin install -f cloud-object-storage;
