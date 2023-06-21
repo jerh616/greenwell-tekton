@@ -54,17 +54,19 @@ spec:
           ibmcloud config --check-version=false;
           ibmcloud login --apikey ${MYAPIKEY} -r us-south;
           ibmcloud plugin install -f cloud-object-storage;
-          ibmcloud cos config crn --crn fdcaf149-c28b-4cc7-becf-9cfa52fcba04;
+          ibmcloud cos config crn --crn ${COS_CRN};
           echo "TRYING PUBLIC COS ENDPOINT";
           ibmcloud cos config endpoint-url --url ${public_cos};
           ibmcloud cos buckets;
+          ibmcloud cos objects --bucket ${bucket_name};
           echo "TRYING COS DOCUMENTED ENDPOINT FOR VPC";
           ibmcloud cos config endpoint-url --url ${direct_cos};
           ibmcloud cos buckets;
+          ibmcloud cos objects --bucket ${bucket_name};
           echo "TRYING PRIVATE COS ENDPOINT";
           ibmcloud cos config endpoint-url --url ${private_cos};
           ibmcloud cos buckets;
-          #ibmcloud cos objects --bucket pipeline-evidence-2;
+          ibmcloud cos objects --bucket ${bucket_name};
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
