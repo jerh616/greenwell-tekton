@@ -149,3 +149,31 @@ spec:
             name: eventHeader
         - configMapKeyRef:
             name: eventBody         
+            apiVersion: tekton.dev/v1beta1
+---            
+kind: Task
+metadata:
+  name: echo-secrets
+spec:
+  steps:
+    - name: show-secrets
+      image: ubuntu
+      env:
+        - name: SECURE_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: secure-properties
+              key: apikey
+      command: ["/bin/bash", "-c"]
+      args:
+        - set -x
+          echo -e "The \033[36msecure-properties apikey \033[0m is ";
+          echo $SECURE_VALUE | base64
+          echo FIN
+    - name: cm-show-event-keys
+      image: ubuntu
+      envFrom:
+        - configMapKeyRef:
+            name: eventHeader
+        - configMapKeyRef:
+            name: eventBody     

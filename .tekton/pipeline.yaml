@@ -19,6 +19,6 @@ spec:
           value: $(params.public-endpoint)
         - name: private-endpoint
           value: $(params.private-endpoint)
-    - name: testing-connectivity
+    - name: show-some-secrets
       taskRef:
-        name: testing-dns       
+        name: echo-secrets      
