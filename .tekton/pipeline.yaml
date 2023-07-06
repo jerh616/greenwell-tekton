@@ -21,4 +21,5 @@ spec:
           value: $(params.private-endpoint)
     - name: show-some-secrets
       taskRef:
-        name: echo-secrets      
+        name: echo-secrets
+        
