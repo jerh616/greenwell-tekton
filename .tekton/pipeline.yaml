@@ -19,6 +19,9 @@ spec:
           value: $(params.public-endpoint)
         - name: private-endpoint
           value: $(params.private-endpoint)
+    - name: test-bluefringe
+      taskRef:
+        name: testing-bluefringe
     - name: testing-connectivity
       taskRef:
         name: testing-dns       
