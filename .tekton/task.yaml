@@ -90,6 +90,27 @@ spec:
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
+  name: testing-bluefringe
+spec:
+  steps:
+    - name: hit-internal-ips
+      image: jerhoconnor/toolbox
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: environment-properties
+        - secretRef:
+            name: secure-properties     
+      command: ["/bin/bash", "-c"]
+      args:
+        - env;
+          ping -c 4 9.0.0.1
+          dig +short sonarqube.apps.wdc-sonar-prod.core.cirrus.ibm.com
+          dig +short ${HOSTNAME}
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
   name: cm-toolchain-props
 spec:
   steps:
