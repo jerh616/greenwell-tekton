@@ -31,19 +31,4 @@ spec:
         - name: environment_value
           value: $(params.environment_value)
         - name: timestamp
-          value: $(params.timestamp)  
-    - name: cm-echo-task
-      taskRef:
-        name: cm-echo-props
-    - name: env-echo-task
-      taskRef: 
-        name: cm-all-props
-    - name: cm-secrets-all-props
-      taskRef:
-        name: cm-secrets-props
-    - name: cm-toolchain-props
-      taskRef:
-        name: cm-toolchain-props
-    - name: show-cm-event-parameters
-      taskRef:
-        name: cm-event-parameters    
+          value: $(params.timestamp)
