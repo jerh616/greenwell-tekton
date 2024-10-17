@@ -20,9 +20,9 @@ spec:
     value: "Live and let die"
   - name: noquote
     value: "Enjoy the silence"
-  - name: timestamp-head
-    value: $(event.head_commit.timestamp)
   - name: timestamp
+    value: $(event.head_commit.timestamp)
+  - name: event.commits
     value: $(event.commits)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
