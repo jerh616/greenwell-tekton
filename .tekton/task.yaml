@@ -11,10 +11,15 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.annotations['devops.cloud.ibm.com/build-number']
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: environment-properties
+              key: DURATION
       command: ["bash", "-c"]
       args:
         - echo $BUILD_NUMBER;
-          sleep 5;
+          sleep $DURATION;
           echo "COMPLETED"
     # - name: use-cd-deploy-base
     #   image: us.icr.io/opentoolchain/cd-deploy-base:deploy
