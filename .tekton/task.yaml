@@ -11,11 +11,11 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.annotations['devops.cloud.ibm.com/build-number']
-        - name: ENVIRONMENT
+        - name: DURATION
           valueFrom:
             configMapKeyRef:
               name: environment-properties
-              key: DURATION
+              key: duration
       command: ["bash", "-c"]
       args:
         - echo $BUILD_NUMBER;
