@@ -59,6 +59,10 @@ spec:
       spec:
         pipelineRef:
           name: echo-props-pipeline
+        workspaces:
+          - name: pipeline-pvc
+            persistentVolumeClaim:
+              claimName: my-test-pvc  
         params:
           - name: quote
             value: $(tt.params.quote)
