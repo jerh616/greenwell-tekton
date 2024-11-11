@@ -21,7 +21,7 @@ spec:
   tasks:
     - name: show-build-number
       workspaces:
-      - name: pipeline-pvc
+      - name: shareddata
         workspace: pipeline-pvc
       taskRef:
         name: simple-task

@@ -62,7 +62,7 @@ spec:
         workspaces:
           - name: pipeline-pvc
             persistentVolumeClaim:
-              claimName: my-test-pvc  
+              claimName: my-test-pvc
         params:
           - name: quote
             value: $(tt.params.quote)

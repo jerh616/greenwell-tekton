@@ -3,6 +3,8 @@ kind: Task
 metadata:
   name: simple-task
 spec:
+  workspaces:
+  - name: shareddata
   steps:
     - name: simple-step
       image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.23
@@ -20,6 +22,12 @@ spec:
       args:
         - echo $BUILD_NUMBER;
           sleep $DURATION;
+          pwd;
+          ls;
+          cd $(workspaces.shareddata);
+          pwd;
+          ls;
+          df;
           echo "COMPLETED"
     # - name: use-cd-deploy-base
     #   image: us.icr.io/opentoolchain/cd-deploy-base:deploy
