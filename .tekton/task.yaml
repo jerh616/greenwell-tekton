@@ -24,7 +24,7 @@ spec:
           sleep $DURATION;
           pwd;
           ls;
-          cd $(workspaces.shareddata);
+          cd $(workspaces.shareddata.path);
           pwd;
           ls;
           df;
