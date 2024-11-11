@@ -41,6 +41,17 @@ spec:
       description: Timestamp of first commit
       default: "1970-01-01T00:00:00Z"
   resourcetemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: my-test-pvc
+      spec:
+        resources:
+          requests:
+            storage: 25Gi
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
