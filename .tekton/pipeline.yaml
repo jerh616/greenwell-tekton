@@ -3,6 +3,8 @@ kind: Pipeline
 metadata:
   name: echo-props-pipeline
 spec:
+  workspaces:
+  - name: pipeline-pvc  
   params:
     - name: quote
       description: simple quoted property
@@ -18,6 +20,9 @@ spec:
       default: EMPTYTIMESTMAP   
   tasks:
     - name: show-build-number
+      workspaces:
+      - name: shared-data
+        workspace: pipeline-pvc
       taskRef:
         name: simple-task
     - name: echo-task
