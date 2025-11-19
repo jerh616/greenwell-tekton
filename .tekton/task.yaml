@@ -32,6 +32,8 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: echo-props
+  labels:
+    runtimeClassName: medium
 spec:
   params:
     - name: quote
