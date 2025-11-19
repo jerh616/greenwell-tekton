@@ -33,7 +33,7 @@ kind: Task
 metadata:
   name: echo-props
   labels:
-    runtimeClassName: medium
+    runtimeClassName: large
 spec:
   params:
     - name: quote
