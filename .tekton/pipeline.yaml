@@ -20,9 +20,6 @@ spec:
     - name: show-build-number
       taskRef:
         name: simple-task
-    - name: run-user-script
-      taskRef:
-        name: run-custom-script    
     - name: echo-task
       taskRef:
         name: echo-props
