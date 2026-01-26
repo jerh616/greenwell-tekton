@@ -27,7 +27,8 @@ spec:
           cd $(workspaces.shareddata.path);
           pwd;
           ls;
-          df;
+          df -h;
+          echo "Sleeping again for $DURATION seconds"
           echo "COMPLETED"
     # - name: use-cd-deploy-base
     #   image: us.icr.io/opentoolchain/cd-deploy-base:deploy
